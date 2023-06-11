@@ -1,0 +1,16 @@
+id;question;answer;is_correct
+1;A person who lives in Somalia is;Somali;true
+1;A person who lives in Somalia is;Somalish;false
+1;A person who lives in Somalia is;Somalian;false
+2;A person who lives in Netherlands is;Netherlandic;false
+2;A person who lives in Netherlands is;Dutch;true
+2;A person who lives in Netherlands is;Hollandese;false
+3;A person who lives in Iran is;Iranese;false
+3;A person who lives in Iran is;Irish;false
+3;A person who lives in Iran is;Iranian;true
+4;A person who lives in Greece is;Grecian;false
+4;A person who lives in Greece is;Greek;true
+4;A person who lives in Greece is;Greese;false
+5;A person who lives in Turkey is;Turkian;false
+5;A person who lives in Turkey is;Turkish;false
+5;A person who lives in Turkey is;Turk;true
