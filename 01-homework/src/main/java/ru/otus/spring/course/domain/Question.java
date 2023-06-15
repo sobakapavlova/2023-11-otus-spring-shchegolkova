@@ -2,6 +2,7 @@ package ru.otus.spring.course.domain;
 
 import lombok.Getter;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Question {
@@ -12,9 +13,13 @@ public class Question {
     @Getter
     private final String question;
 
-    public Question(int id, String question) {
+    @Getter
+    private final List<Answer> answerList;
+
+    public Question(int id, String question, List<Answer> answerList) {
         this.id = id;
         this.question = question;
+        this.answerList = answerList;
     }
 
     @Override

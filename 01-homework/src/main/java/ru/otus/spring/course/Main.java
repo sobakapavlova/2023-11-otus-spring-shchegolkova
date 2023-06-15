@@ -1,16 +1,14 @@
 package ru.otus.spring.course;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.otus.spring.course.service.ConsoleService;
-
-import java.io.IOException;
+import ru.otus.spring.course.service.QuizService;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
-        ConsoleService consoleService = context.getBean(ConsoleService.class);
-        consoleService.display();
+        QuizService quizService = context.getBean(QuizService.class);
+        quizService.startQuiz();
         context.close();
     }
 }
