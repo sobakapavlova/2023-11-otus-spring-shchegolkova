@@ -1,5 +1,6 @@
 package ru.otus.spring.course.dao;
 
+import ru.otus.spring.course.domain.Answer;
 import ru.otus.spring.course.domain.Question;
 import ru.otus.spring.course.service.ConsoleServiceImpl;
 import ru.otus.spring.course.utils.ObjectConverter;
@@ -33,19 +34,37 @@ public class CSVQuestionDAOImpl implements CSVQuestionDAO {
             List<Question> questions = new ArrayList<>();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                readLineToQuestion(questions, line);
+                questions.add(readLineToQuestion(line));
             }
-            return questions;
+            return makeAnswerOptionsForQuestion(questions);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void readLineToQuestion(List<Question> questions, String line) {
+    private Question readLineToQuestion(String line) {
         String[] values = line.split(SEPARATOR);
-        Question question = new ObjectConverter().convertToQuestion(values);
-        if (!questions.contains(question)) {
-            questions.add(question);
+        return new ObjectConverter().convertToQuestion(values);
+    }
+
+    private List<Question> makeAnswerOptionsForQuestion(List<Question> questions) {
+        List<Question> newQuestions = new ArrayList<>();
+        for (Question question : questions) {
+            boolean questionExists = false;
+            for (Question newQuestion : newQuestions) {
+                if (question.getId() == newQuestion.getId() &&
+                        question.getQuestion().equals(newQuestion.getQuestion())) {
+                    newQuestion.getAnswerList().addAll(question.getAnswerList());
+                    questionExists = true;
+                    break;
+                }
+            }
+            if (!questionExists) {
+                List<Answer> answers = new ArrayList<>(question.getAnswerList());
+                Question newQuestion = new Question(question.getId(), question.getQuestion(), answers);
+                newQuestions.add(newQuestion);
+            }
         }
+        return newQuestions;
     }
 }
