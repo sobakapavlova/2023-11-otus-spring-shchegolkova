@@ -4,10 +4,11 @@ import lombok.Getter;
 
 public class UserAnswer {
     @Getter
-    final int questionId;
+    private final int questionId;
 
     @Getter
-    final int answerId;
+    private final int answerId;
+
     public UserAnswer(Integer questionId, int answerId) {
         this.questionId = questionId;
         this.answerId = answerId;

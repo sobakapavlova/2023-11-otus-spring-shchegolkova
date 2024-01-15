@@ -1,9 +1,6 @@
 package ru.otus.spring.course.utils;
 
 import ru.otus.spring.course.domain.Answer;
-import ru.otus.spring.course.domain.Console;
-import ru.otus.spring.course.domain.Score;
-import ru.otus.spring.course.domain.UserInfo;
 
 import java.util.List;
 

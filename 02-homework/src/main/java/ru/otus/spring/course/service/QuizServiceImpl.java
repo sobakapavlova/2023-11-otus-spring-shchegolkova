@@ -1,6 +1,5 @@
 package ru.otus.spring.course.service;
 
-import lombok.Getter;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.course.dao.CSVQuestionDAOImpl;
 import ru.otus.spring.course.domain.Answer;
@@ -22,7 +21,9 @@ public class QuizServiceImpl implements QuizService {
 
     private final QuestionConsoleServiceImpl questionConsoleService;
 
-    public QuizServiceImpl(UserService userService, CSVQuestionDAOImpl csvQuestionDAO, QuestionConsoleServiceImpl questionConsoleService) {
+    public QuizServiceImpl(UserService userService,
+                           CSVQuestionDAOImpl csvQuestionDAO,
+                           QuestionConsoleServiceImpl questionConsoleService) {
         this.userService = userService;
         this.csvQuestionDAO = csvQuestionDAO;
         this.questionConsoleService = questionConsoleService;
@@ -46,8 +47,9 @@ public class QuizServiceImpl implements QuizService {
             userAnswerList.add(userAnswer);
             final List<Answer> answerToCheck = csvQuestionDAO.getAnswerListById(userAnswer.getQuestionId());
             final Boolean checkResult = answerToCheck.get(userAnswer.getAnswerId() - 1).getIsCorrect();
-            if (checkResult)
+            if (checkResult) {
                 score += 1;
+            }
             questionConsoleService.display(String.valueOf(checkResult));
         }
         return new Score(score, userInfo);

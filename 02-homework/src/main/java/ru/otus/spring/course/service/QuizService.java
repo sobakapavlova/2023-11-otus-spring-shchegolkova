@@ -5,7 +5,9 @@ import ru.otus.spring.course.domain.UserInfo;
 
 public interface QuizService {
     UserInfo startQuiz();
+
     Score doQuiz(UserInfo userInfo);
+
     void finishQuiz(Score score);
 
 }

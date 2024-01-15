@@ -6,10 +6,10 @@ public class UserInfo {
 
 
     @Getter
-    final String firstName;
+    private final String firstName;
 
     @Getter
-    final String lastName;
+    private final String lastName;
 
 
     public UserInfo(String firstName, String lastName) {

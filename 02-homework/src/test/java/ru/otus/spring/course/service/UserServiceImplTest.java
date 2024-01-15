@@ -2,8 +2,6 @@ package ru.otus.spring.course.service;
 
 import org.junit.jupiter.api.Test;
 import ru.otus.spring.course.domain.Console;
-import ru.otus.spring.course.domain.Score;
-import ru.otus.spring.course.domain.UserInfo;
 import ru.otus.spring.course.service.console.ScoreConsoleServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
