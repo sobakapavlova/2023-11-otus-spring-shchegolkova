@@ -3,6 +3,7 @@ package ru.otus.spring.course.service;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.course.dao.CSVQuestionDAOImpl;
 import ru.otus.spring.course.domain.Answer;
+import ru.otus.spring.course.domain.Console;
 import ru.otus.spring.course.domain.Question;
 import ru.otus.spring.course.domain.Score;
 import ru.otus.spring.course.domain.UserAnswer;
@@ -35,7 +36,6 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public void runQuiz() {
         final UserInfo userInfo = userService.getUser();
-        userService.greet(userInfo);
         final Score score = doQuiz(userInfo);
         finishQuiz(score);
     }
@@ -74,7 +74,11 @@ public class QuizServiceImpl implements QuizService {
     }
 
     private void finishQuiz(Score score) {
-        userService.getUserResult(score);
+        final String formattedText = Console.RESULT
+                .getStr()
+                .formatted(score.getUserInfo().getFirstName(),
+                        score.getUserInfo().getLastName(),
+                        score.getPoints());
+        ioService.display(formattedText);
     }
-
 }

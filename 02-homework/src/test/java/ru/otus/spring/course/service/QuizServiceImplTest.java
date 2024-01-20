@@ -68,9 +68,4 @@ class QuizServiceImplTest {
         verify(ioService, times(2)).display(anyString());
     }
 
-    @Test
-    void finishQuiz() {
-        userService.getUserResult(scoreObject);
-        verify(userService).getUserResult(scoreObject);
-    }
 }
