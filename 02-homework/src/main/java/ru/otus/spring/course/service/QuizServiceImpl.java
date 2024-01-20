@@ -2,7 +2,6 @@ package ru.otus.spring.course.service;
 
 import org.springframework.stereotype.Service;
 import ru.otus.spring.course.dao.CSVQuestionDAOImpl;
-import ru.otus.spring.course.domain.Answer;
 import ru.otus.spring.course.domain.Console;
 import ru.otus.spring.course.domain.Question;
 import ru.otus.spring.course.domain.Score;
@@ -12,6 +11,7 @@ import ru.otus.spring.course.domain.UserInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class QuizServiceImpl implements QuizService {
@@ -44,20 +44,37 @@ public class QuizServiceImpl implements QuizService {
     private Score doQuiz(UserInfo userInfo) {
         List<Question> questions = csvQuestionDAO.getAll();
         List<UserAnswer> userAnswerList = new ArrayList<>();
-        int score = 0;
-        for (Question question : questions) {
-            final String formattedQuestion = formatterService.format(question).toString();
+        AtomicInteger score = new AtomicInteger();
+
+        questions.forEach(question -> {
+            String formattedQuestion = formatterService.format(question).toString();
             ioService.display(formattedQuestion);
-            final UserAnswer userAnswer = getAnswerForQuestion(question);
+
+            UserAnswer userAnswer = getAnswerForQuestion(question);
             userAnswerList.add(userAnswer);
-            final List<Answer> answerToCheck = question.getAnswerList();
-            final Boolean checkResult = answerToCheck.get(userAnswer.getAnswerId() - 1).getIsCorrect();
+
+            boolean checkResult = checkAnswer(question, userAnswer);
             if (checkResult) {
-                score += 1;
+                score.incrementAndGet();
             }
-            ioService.display(String.valueOf(checkResult));
+
+            displayFeedback(checkResult);
+        });
+
+        return new Score(score.get(), userInfo);
+    }
+
+
+    private boolean checkAnswer(Question question, UserAnswer userAnswer) {
+        try {
+            return question.getAnswerList().get(userAnswer.getAnswerId() - 1).getIsCorrect();
+        } catch (IndexOutOfBoundsException e) {
+            return false;
         }
-        return new Score(score, userInfo);
+    }
+
+    private void displayFeedback(boolean isCorrect) {
+        ioService.display(isCorrect ? "Correct!" : "Incorrect.");
     }
 
     public UserAnswer getAnswerForQuestion(Question question) {
