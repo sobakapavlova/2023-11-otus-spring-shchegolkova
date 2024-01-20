@@ -7,13 +7,11 @@ import ru.otus.spring.course.domain.Question;
 import ru.otus.spring.course.domain.Score;
 import ru.otus.spring.course.domain.UserAnswer;
 import ru.otus.spring.course.domain.UserInfo;
-import ru.otus.spring.course.service.console.QuestionConsoleServiceImpl;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -23,12 +21,12 @@ import static org.mockito.Mockito.when;
 class QuizServiceImplTest {
 
     private final UserServiceImpl userService = mock(UserServiceImpl.class);
-    private final QuestionConsoleServiceImpl questionConsoleService = mock(QuestionConsoleServiceImpl.class);
+    private final IOServiceImpl ioService = mock(IOServiceImpl.class);
+    private final FormatterServiceImpl formatterService = mock(FormatterServiceImpl.class);
     private final CSVQuestionDAOImpl csvQuestionDAO = mock(CSVQuestionDAOImpl.class);
     private final UserInfo userInfo = new TestData().userInfo;
     private final Question question = new TestData().question;
     private final List<Question> questions = new TestData().questionList;
-    private final List<Answer> answerList = new TestData().answerList;
     private final Score scoreObject = new TestData().score;
     private final List<UserAnswer> userAnswerList = new TestData().userAnswerList;
     private final UserAnswer userAnswer = new TestData().userAnswer;
@@ -47,14 +45,13 @@ class QuizServiceImplTest {
         questions.add(question);
 
         when(csvQuestionDAO.getAll()).thenReturn(questions);
-        when(questionConsoleService.read(question)).thenReturn(userAnswer);
 
         final int answerId = userAnswer.getAnswerId();
         int score = 0;
         userAnswerList.add(userAnswer);
 
         for (Question question : questions) {
-            questionConsoleService.display(question);
+            formatterService.format(question);
             final List<Answer> answerToCheck = question.getAnswerList();
             final Boolean checkResult = answerToCheck.get(answerId - 1).getIsCorrect();
 
@@ -62,13 +59,13 @@ class QuizServiceImplTest {
                 score += 1;
 
             assertTrue(checkResult);
-            questionConsoleService.display(anyString());
+            ioService.display(anyString());
         }
 
         assertEquals(scoreObject.getUserInfo().getFirstName(), userInfo.getFirstName());
         assertEquals(scoreObject.getUserInfo().getLastName(), userInfo.getLastName());
         assertEquals(score, 2);
-        verify(questionConsoleService, times(2)).display(anyString());
+        verify(ioService, times(2)).display(anyString());
     }
 
     @Test

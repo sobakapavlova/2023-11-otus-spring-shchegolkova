@@ -7,10 +7,10 @@ import ru.otus.spring.course.domain.Question;
 import ru.otus.spring.course.domain.Score;
 import ru.otus.spring.course.domain.UserAnswer;
 import ru.otus.spring.course.domain.UserInfo;
-import ru.otus.spring.course.service.console.QuestionConsoleServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class QuizServiceImpl implements QuizService {
@@ -19,14 +19,17 @@ public class QuizServiceImpl implements QuizService {
 
     private final CSVQuestionDAOImpl csvQuestionDAO;
 
-    private final QuestionConsoleServiceImpl questionConsoleService;
+    private final FormatterServiceImpl formatterService;
+
+    private final IOServiceImpl ioService;
 
     public QuizServiceImpl(UserService userService,
                            CSVQuestionDAOImpl csvQuestionDAO,
-                           QuestionConsoleServiceImpl questionConsoleService) {
+                           FormatterServiceImpl formatterService, IOServiceImpl ioService) {
         this.userService = userService;
         this.csvQuestionDAO = csvQuestionDAO;
-        this.questionConsoleService = questionConsoleService;
+        this.formatterService = formatterService;
+        this.ioService = ioService;
     }
 
     @Override
@@ -42,19 +45,33 @@ public class QuizServiceImpl implements QuizService {
         List<UserAnswer> userAnswerList = new ArrayList<>();
         int score = 0;
         for (Question question : questions) {
-            questionConsoleService.display(question);
-            final UserAnswer userAnswer = questionConsoleService.read(question);
+            final String formattedQuestion = formatterService.format(question).toString();
+            ioService.display(formattedQuestion);
+            final UserAnswer userAnswer = mapInput(question);
             userAnswerList.add(userAnswer);
             final List<Answer> answerToCheck = question.getAnswerList();
             final Boolean checkResult = answerToCheck.get(userAnswer.getAnswerId() - 1).getIsCorrect();
             if (checkResult) {
                 score += 1;
             }
-            questionConsoleService.display(String.valueOf(checkResult));
+            ioService.display(String.valueOf(checkResult));
         }
         return new Score(score, userInfo);
     }
 
+    public UserAnswer mapInput(Question question) {
+        String userAnswer = ioService.read();
+        while (!checkValidInput(userAnswer)) {
+            ioService.display("Wrong input, try another option:");
+            userAnswer = ioService.read();
+        }
+        return new UserAnswer(question.getId(), Integer.parseInt(userAnswer));
+    }
+
+    private boolean checkValidInput(String userAnswer) {
+        final Set<String> validOption = Set.of("1", "2", "3");
+        return validOption.contains(userAnswer);
+    }
 
     private void finishQuiz(Score score) {
         userService.getUserResult(score);

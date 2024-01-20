@@ -1,7 +1,7 @@
-package ru.otus.spring.course.service.console;
+package ru.otus.spring.course.service;
 
 public interface IOService {
-//    void display(T t);
+//    void format(T t);
 
     void display(String str);
 

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import ru.otus.spring.course.domain.Answer;
 import ru.otus.spring.course.domain.Question;
-import ru.otus.spring.course.service.console.QuestionConsoleServiceImpl;
-import ru.otus.spring.course.utils.ObjectConverter;
+import ru.otus.spring.course.service.IOServiceImpl;
+import ru.otus.spring.course.utils.ObjectMapper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class CSVQuestionDAOImpl implements CSVQuestionDAO {
 
     @Override
     public List<Question> getAll() {
-        try (InputStream inputStream = QuestionConsoleServiceImpl.class.getClassLoader()
+        try (InputStream inputStream = IOServiceImpl.class.getClassLoader()
                 .getResourceAsStream(resourceName)) {
             if (inputStream == null) {
                 throw new IllegalArgumentException("Resource not found: " + resourceName);
@@ -48,7 +48,7 @@ public class CSVQuestionDAOImpl implements CSVQuestionDAO {
 
     private Question readLineToQuestion(String line) {
         String[] values = line.split(SEPARATOR);
-        return new ObjectConverter().convertToQuestion(values);
+        return new ObjectMapper().convertToQuestion(values);
     }
 
     private List<Question> makeAnswerOptionsForQuestion(List<Question> questions) {

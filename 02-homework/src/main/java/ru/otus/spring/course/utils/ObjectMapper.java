@@ -6,7 +6,7 @@ import ru.otus.spring.course.domain.Question;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObjectConverter {
+public class ObjectMapper {
     public Question convertToQuestion(String[] values) {
         int id = Integer.parseInt(values[0]);
         String question = values[1];

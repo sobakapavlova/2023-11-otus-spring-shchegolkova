@@ -1,8 +1,11 @@
-package ru.otus.spring.course.service.console;
+package ru.otus.spring.course.service;
+
+import org.springframework.stereotype.Service;
 
 import java.io.PrintStream;
 import java.util.Scanner;
 
+@Service
 public class IOServiceImpl implements IOService {
 
     private final PrintStream outputStream;

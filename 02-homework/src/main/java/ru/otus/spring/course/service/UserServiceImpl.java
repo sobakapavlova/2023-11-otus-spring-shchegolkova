@@ -4,24 +4,22 @@ import org.springframework.stereotype.Service;
 import ru.otus.spring.course.domain.Console;
 import ru.otus.spring.course.domain.Score;
 import ru.otus.spring.course.domain.UserInfo;
-import ru.otus.spring.course.service.console.ScoreConsoleServiceImpl;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final ScoreConsoleServiceImpl scoreConsoleService;
+    private final IOServiceImpl ioService;
 
-
-    public UserServiceImpl(ScoreConsoleServiceImpl scoreConsoleService) {
-        this.scoreConsoleService = scoreConsoleService;
+    public UserServiceImpl(IOServiceImpl ioService) {
+        this.ioService = ioService;
     }
 
     @Override
     public UserInfo getUser() {
-        scoreConsoleService.display(Console.PRINT_FIRSTNAME.getStr());
-        final String firstName = scoreConsoleService.read();
-        scoreConsoleService.display(Console.PRINT_LASTNAME.getStr());
-        final String lastName = scoreConsoleService.read();
+        ioService.display(Console.PRINT_FIRSTNAME.getStr());
+        final String firstName = ioService.read();
+        ioService.display(Console.PRINT_LASTNAME.getStr());
+        final String lastName = ioService.read();
         return new UserInfo(firstName, lastName);
     }
 
@@ -30,7 +28,7 @@ public class UserServiceImpl implements UserService {
         final String formattedText = Console.GREETING
                 .getStr()
                 .formatted(userInfo.getFirstName(), userInfo.getLastName());
-        scoreConsoleService.display(formattedText);
+        ioService.display(formattedText);
     }
 
     @Override
@@ -40,6 +38,6 @@ public class UserServiceImpl implements UserService {
                 .formatted(score.getUserInfo().getFirstName(),
                         score.getUserInfo().getLastName(),
                         score.getPoints());
-        scoreConsoleService.display(formattedText);
+        ioService.display(formattedText);
     }
 }
