@@ -1,6 +1,8 @@
 package ru.otus.spring.course.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 import ru.otus.spring.course.domain.Answer;
 import ru.otus.spring.course.domain.Question;
@@ -15,13 +17,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+@PropertySource("classpath:application.properties")
 @Repository
 public class CSVQuestionDAOImpl implements CSVQuestionDAO {
     public static final String SEPARATOR = ";";
 
     private final String resourceName;
 
-    public CSVQuestionDAOImpl(@Value("questions.csv") String resourceName) {
+    @Autowired
+    public CSVQuestionDAOImpl(@Value("${file}") String resourceName) {
         this.resourceName = resourceName;
     }
 

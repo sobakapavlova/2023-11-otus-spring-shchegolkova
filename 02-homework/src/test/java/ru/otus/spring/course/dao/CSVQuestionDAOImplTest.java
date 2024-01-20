@@ -1,6 +1,8 @@
 package ru.otus.spring.course.dao;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import ru.otus.spring.course.domain.Answer;
 import ru.otus.spring.course.domain.Question;
 import ru.otus.spring.course.service.TestData;
@@ -9,11 +11,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@PropertySource("classpath:application.properties")
 class CSVQuestionDAOImplTest {
 
     private final Question question = new TestData().question;
     private final List<Question> expectedQuestionList = new TestData().questionList;
-    CSVQuestionDAOImpl dao = new CSVQuestionDAOImpl("questions.csv");
+
+    @Value("$file")
+    private  String resourceName;
+    CSVQuestionDAOImpl dao = new CSVQuestionDAOImpl(resourceName);
 
 
     @Test
