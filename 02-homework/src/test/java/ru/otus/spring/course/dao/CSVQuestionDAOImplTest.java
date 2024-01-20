@@ -38,16 +38,15 @@ class CSVQuestionDAOImplTest {
 
     @Test
     void testGetAnswerListByIdReturnsAnswerList() {
-        List<Answer> answerList = dao.getAnswerListById(1);
+        List<Answer> answerList = question.getAnswerList();
         assertNotNull(answerList);
         assertNotNull(answerList.get(0));
     }
 
     @Test
     void testGetAnswerListByIdReturnsCorrectAnswerList() {
-        List<Answer> answerList = dao.getAnswerListById(1);
+        List<Answer> answerList = question.getAnswerList();
         assertNotNull(answerList);
-        assertEquals(3, answerList.size());
         assertEquals(1, answerList.get(0).getId());
         assertEquals(answerList.get(0).getAnswerText(), answerList.get(0).getAnswerText());
         assertEquals(answerList.get(0).getIsCorrect(), answerList.get(0).getIsCorrect());

@@ -35,11 +35,11 @@ class QuizServiceImplTest {
 
     @Test
     void startQuiz() {
-        when(userService.collectInfo()).thenReturn(userInfo);
-        userService.collectInfo();
+        when(userService.getUser()).thenReturn(userInfo);
+        userService.getUser();
         assertEquals(userInfo.getFirstName(), "Ivan");
         assertEquals(userInfo.getLastName(), "Kruzenshtern");
-        verify(userService).collectInfo();
+        verify(userService).getUser();
     }
 
     @Test
@@ -47,7 +47,6 @@ class QuizServiceImplTest {
         questions.add(question);
 
         when(csvQuestionDAO.getAll()).thenReturn(questions);
-        when(csvQuestionDAO.getAnswerListById(any())).thenReturn(answerList);
         when(questionConsoleService.read(question)).thenReturn(userAnswer);
 
         final int answerId = userAnswer.getAnswerId();
@@ -56,10 +55,8 @@ class QuizServiceImplTest {
 
         for (Question question : questions) {
             questionConsoleService.display(question);
-            final List<Answer> answerToCheck = csvQuestionDAO.getAnswerListById(userAnswer.getQuestionId());
+            final List<Answer> answerToCheck = question.getAnswerList();
             final Boolean checkResult = answerToCheck.get(answerId - 1).getIsCorrect();
-
-            when(answerToCheck).thenReturn(answerList);
 
             if (checkResult)
                 score += 1;

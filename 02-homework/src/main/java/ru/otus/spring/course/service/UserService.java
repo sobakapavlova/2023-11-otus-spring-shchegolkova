@@ -4,7 +4,7 @@ import ru.otus.spring.course.domain.Score;
 import ru.otus.spring.course.domain.UserInfo;
 
 public interface UserService {
-    UserInfo collectInfo();
+    UserInfo getUser();
 
     void greet(UserInfo userInfo);
 

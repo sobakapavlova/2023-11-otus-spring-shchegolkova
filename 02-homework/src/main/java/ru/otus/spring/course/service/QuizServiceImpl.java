@@ -30,14 +30,14 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public UserInfo startQuiz() {
-        final UserInfo userInfo = userService.collectInfo();
+    public void runQuiz() {
+        final UserInfo userInfo = userService.getUser();
         userService.greet(userInfo);
-        return userInfo;
+        final Score score = doQuiz(userInfo);
+        finishQuiz(score);
     }
 
-    @Override
-    public Score doQuiz(UserInfo userInfo) {
+    private Score doQuiz(UserInfo userInfo) {
         List<Question> questions = csvQuestionDAO.getAll();
         List<UserAnswer> userAnswerList = new ArrayList<>();
         int score = 0;
@@ -45,7 +45,7 @@ public class QuizServiceImpl implements QuizService {
             questionConsoleService.display(question);
             final UserAnswer userAnswer = questionConsoleService.read(question);
             userAnswerList.add(userAnswer);
-            final List<Answer> answerToCheck = csvQuestionDAO.getAnswerListById(userAnswer.getQuestionId());
+            final List<Answer> answerToCheck = question.getAnswerList();
             final Boolean checkResult = answerToCheck.get(userAnswer.getAnswerId() - 1).getIsCorrect();
             if (checkResult) {
                 score += 1;
@@ -56,8 +56,7 @@ public class QuizServiceImpl implements QuizService {
     }
 
 
-    @Override
-    public void finishQuiz(Score score) {
+    private void finishQuiz(Score score) {
         userService.getUserResult(score);
     }
 

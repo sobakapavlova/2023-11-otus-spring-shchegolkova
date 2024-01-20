@@ -11,10 +11,10 @@ public class Formatter {
         sb.append("Question ").append(id).append(" : ").append(questionText);
         if (!answersList.isEmpty()) {
             sb.append("...");
-            char letter = 'a';
+            char option = '1';
             for (Answer answer : answersList) {
-                sb.append(" ").append(letter).append(")").append(" ").append(answer.getAnswerText());
-                letter++;
+                sb.append(" ").append(option).append(")").append(" ").append(answer.getAnswerText());
+                option++;
             }
         }
         return sb;

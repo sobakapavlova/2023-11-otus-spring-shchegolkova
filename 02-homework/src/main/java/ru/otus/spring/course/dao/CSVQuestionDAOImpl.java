@@ -42,18 +42,8 @@ public class CSVQuestionDAOImpl implements CSVQuestionDAO {
             }
             return makeAnswerOptionsForQuestion(questions);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e);
         }
-    }
-
-
-    @Override
-    public List<Answer> getAnswerListById(Integer id) {
-        final List<Question> questions = getAll();
-        return questions.stream()
-                .flatMap(question -> question.getAnswerList().stream())
-                .filter(answer -> answer.getId() == id)
-                .toList();
     }
 
     private Question readLineToQuestion(String line) {

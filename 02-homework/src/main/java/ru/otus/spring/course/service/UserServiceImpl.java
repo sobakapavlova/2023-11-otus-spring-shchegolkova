@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserInfo collectInfo() {
+    public UserInfo getUser() {
         scoreConsoleService.display(Console.PRINT_FIRSTNAME.getStr());
         final String firstName = scoreConsoleService.read();
         scoreConsoleService.display(Console.PRINT_LASTNAME.getStr());
