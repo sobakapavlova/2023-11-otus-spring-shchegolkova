@@ -13,7 +13,7 @@ public class ConsoleServiceImpl implements ConsoleService {
                 question -> {
                     StringBuilder sb = new Formatter()
                             .formatPrint(question.getId(), question.getQuestion(), question.getAnswerList());
-                    outputStream.println(sb);
+                    System.out.println(sb);
                 }
         );
     }
