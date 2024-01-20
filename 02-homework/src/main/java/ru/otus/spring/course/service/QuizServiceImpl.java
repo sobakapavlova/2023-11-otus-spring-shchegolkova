@@ -36,6 +36,7 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public void runQuiz() {
         final UserInfo userInfo = userService.getUser();
+        greet(userInfo);
         final Score score = doQuiz(userInfo);
         finishQuiz(score);
     }
@@ -47,7 +48,7 @@ public class QuizServiceImpl implements QuizService {
         for (Question question : questions) {
             final String formattedQuestion = formatterService.format(question).toString();
             ioService.display(formattedQuestion);
-            final UserAnswer userAnswer = mapInput(question);
+            final UserAnswer userAnswer = getAnswerForQuestion(question);
             userAnswerList.add(userAnswer);
             final List<Answer> answerToCheck = question.getAnswerList();
             final Boolean checkResult = answerToCheck.get(userAnswer.getAnswerId() - 1).getIsCorrect();
@@ -59,7 +60,7 @@ public class QuizServiceImpl implements QuizService {
         return new Score(score, userInfo);
     }
 
-    public UserAnswer mapInput(Question question) {
+    public UserAnswer getAnswerForQuestion(Question question) {
         String userAnswer = ioService.read();
         while (!checkValidInput(userAnswer)) {
             ioService.display("Wrong input, try another option:");
@@ -81,4 +82,12 @@ public class QuizServiceImpl implements QuizService {
                         score.getPoints());
         ioService.display(formattedText);
     }
+
+    private void greet(UserInfo userInfo) {
+        final String formattedText = Console.GREETING
+                .getStr()
+                .formatted(userInfo.getFirstName(), userInfo.getLastName());
+        ioService.display(formattedText);
+    }
+
 }

@@ -19,16 +19,6 @@ public class UserServiceImpl implements UserService {
         final String firstName = ioService.read();
         ioService.display(Console.PRINT_LASTNAME.getStr());
         final String lastName = ioService.read();
-        final UserInfo userInfo = new UserInfo(firstName, lastName);
-        greet(userInfo);
-        return userInfo;
+        return new UserInfo(firstName, lastName);
     }
-
-private void greet(UserInfo userInfo) {
-        final String formattedText = Console.GREETING
-                .getStr()
-                .formatted(userInfo.getFirstName(), userInfo.getLastName());
-        ioService.display(formattedText);
-    }
-
 }
