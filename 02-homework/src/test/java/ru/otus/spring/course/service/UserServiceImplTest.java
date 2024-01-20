@@ -31,7 +31,7 @@ class UserServiceImplTest extends TestData {
     @Test
     void greet() {
         final String formattedText = Console.GREETING.getStr().formatted(userInfo.getFirstName(), userInfo.getLastName());
-        assertEquals(formattedText, "\nWelcome, Ivan Kruzenshtern, let's check your knowledge of English. Answer the questions by typing the letter:\n");
+        assertEquals(formattedText, "\nWelcome, Ivan Kruzenshtern, let's check your knowledge of English. Answer the questions by typing the option:\n");
         ioService.display(formattedText);
         verify(ioService).display(formattedText);
     }

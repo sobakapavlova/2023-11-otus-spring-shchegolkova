@@ -16,11 +16,7 @@ class CSVQuestionDAOImplTest {
 
     private final Question question = new TestData().question;
     private final List<Question> expectedQuestionList = new TestData().questionList;
-
-    @Value("$file")
-    private  String resourceName;
-    CSVQuestionDAOImpl dao = new CSVQuestionDAOImpl(resourceName);
-
+    CSVQuestionDAOImpl dao = new CSVQuestionDAOImpl("questions.csv");
 
     @Test
     void testGetAllReturnsQuestionList() {
