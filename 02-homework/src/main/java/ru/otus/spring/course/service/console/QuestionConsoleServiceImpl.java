@@ -13,6 +13,7 @@ import java.util.Set;
 public class QuestionConsoleServiceImpl implements ConsoleService<Question> {
 
     private final PrintStream outputStream;
+
     private final Scanner inputStream;
 
     public QuestionConsoleServiceImpl() {

@@ -9,7 +9,7 @@ import java.util.Scanner;
 @Service
 public class ScoreConsoleServiceImpl implements ConsoleService<Score> {
 
-    PrintStream outputStream;
+    private final PrintStream outputStream;
 
     public ScoreConsoleServiceImpl() {
         outputStream = System.out;
