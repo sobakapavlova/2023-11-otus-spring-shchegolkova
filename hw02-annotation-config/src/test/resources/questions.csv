@@ -1,0 +1,6 @@
+# Добавить сюда своих вопросов. Эту строку надо пропустить при настройке CsvToBean (withSkipLines)
+A person who lives in Somalia is;Somali%true|Somalish%false|Somalian%false
+A person who lives in Netherlands is;Netherlandic%false|Dutch%true|Hollandese%false
+A person who lives in Iran is;Iranese%false|Irish%false|Iranian%true
+A person who lives in Greece is;Grecian%false|Greek%true|Greese%false
+A person who lives in Turkey is;Turkian%false|Turkish%false|Turk%true
