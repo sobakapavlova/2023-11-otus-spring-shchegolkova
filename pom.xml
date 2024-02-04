@@ -14,5 +14,7 @@
 
     <modules>
         <module>01-homework</module>
+        <module>hw02-annotation-config</module>
+        <module>hw03-spring-boot</module>
     </modules>
 </project>

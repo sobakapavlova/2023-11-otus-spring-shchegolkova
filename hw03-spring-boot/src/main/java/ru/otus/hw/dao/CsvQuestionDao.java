@@ -3,12 +3,16 @@ package ru.otus.hw.dao;
 import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
+import ru.otus.hw.config.AppProperties;
 import ru.otus.hw.config.TestFileNameProvider;
 import ru.otus.hw.dao.dto.QuestionDto;
 import ru.otus.hw.domain.Question;
 import ru.otus.hw.exceptions.QuestionReadException;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -16,14 +20,15 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
+@EnableConfigurationProperties(AppProperties.class)
 public class CsvQuestionDao implements QuestionDao {
-    private final TestFileNameProvider fileNameProvider;
+
+private final TestFileNameProvider fileNameProvider;
 
     @Override
     public List<Question> findAll() {
-        InputStreamReader inputStreamReader = getInputStreamReader();
         List<Question> questions = null;
-        try {
+        try (InputStreamReader inputStreamReader = getInputStreamReader()) {
             List<QuestionDto> beans = new CsvToBeanBuilder(inputStreamReader)
                     .withType(QuestionDto.class)
                     .withSkipLines(1)
@@ -35,8 +40,8 @@ public class CsvQuestionDao implements QuestionDao {
                     .map(QuestionDto::toDomainObject)
                     .toList();
 
-        } catch (Throwable e) {
-            new QuestionReadException("Cannot read from file: ", e);
+        } catch (IOException e) {
+            throw new QuestionReadException("Cannot read from file: ", e);
         }
         return questions;
     }

@@ -1,0 +1,24 @@
+
+
+
+
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⣿⣿⢙⠛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⢋⠉⠘⣿⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⣿⡏⠄⠄⠄⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠉⠄⠄⠄⠄⠁⢸⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⣿⠄⠄⠄⠄⠄⠄⠈⠙⢿⣿⣿⣿⡿⠋⠄⠄⠄⠄⠄⢀⠄⠄⢹⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⣿⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢀⠄⠄⢸⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⠿⢤⣤⡔⠒⣶⣶⣶⣶⣶⡖⠒⠒⠒⠒⣶⣖⠒⣶⣦⣤⣤⣄⣸⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣷⡀⠄⠈⣿⣿⡄⢻⣿⣿⣿⣿⣿⡄⠄⠄⠄⢹⣿⡆⢹⣿⣿⣿⣿⣿⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣷⠄⠄⠸⣿⣷⡈⣿⣿⡿⠹⣿⣿⡀⠄⠄⠄⢻⣿⡄⢻⣿⣿⣿⣿⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⣷⣾⣷⣿⣿⣿⣿⡿⠁⠄⢻⣿⣿⣿⣿⣿⣿⣿⣷⣼⣿⣿⣿⣿⣿     ${AnsiColor.BRIGHT_WHITE}Welcome to the Student Testing App!
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⣿⠄⣿⣿⣿⣿⡿⠁⠄⣤⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⠟⠄⠄⠉⠉⠉⠄⠄⡿⠛⢻⠈⠙⠟⠛⠛⠻⠿⠿⢿⠿⠿⠁⢀⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⣿⡝⠐⠄⠄⠄⠄⠄⣀⠄⠄⠄⠄⠩⠐⡀⠄⠄⠈⠉⢿⣿⣿⣿⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⣿⣿⡖⠄⣀⠄⠄⠛⠻⣿⣿⠟⠛⠄⠄⠄⠄⠄⣀⣴⣿⣿⣿⣿⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⣿⣿⠇⣠⠊⠈⠐⠤⢤⣀⣀⣠⠤⣀⣀⣀⠛⠉⠄⠉⠻⣿⣿⣿⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⣿⡿⢋⡰⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⢿⣿⣿     ${AnsiColor.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}     ⣿⣿⡋⠐⢰⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠘⣿⣿     ${AnsiColor.BRIGHT_WHITE}
+
+${AnsiColor.BRIGHT_CYAN}*************************************************
+${AnsiColor.BRIGHT_CYAN}*         ${AnsiColor.BRIGHT_GREEN}Student Test Application v1.0         ${AnsiColor.BRIGHT_CYAN}*
+${AnsiColor.BRIGHT_CYAN}*         ${AnsiColor.BRIGHT_GREEN}Author: Anastasia Shchegolkova        ${AnsiColor.BRIGHT_CYAN}*
+${AnsiColor.BRIGHT_CYAN}*************************************************${AnsiColor.DEFAULT}
