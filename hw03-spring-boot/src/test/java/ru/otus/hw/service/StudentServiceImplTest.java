@@ -18,12 +18,12 @@ class StudentServiceImplTest {
     @DisplayName("determine current student correctly")
     void determineCurrentStudent() {
         Student expectedResult = new Student("Cute", "Cat");
-        when(ioService.readStringWithPrompt("Please input your first name")).thenReturn(expectedResult.firstName());
-        when(ioService.readStringWithPrompt("Please input your last name")).thenReturn(expectedResult.lastName());
+        when(ioService.readStringWithPromptLocalized("StudentService.input.first.name")).thenReturn(expectedResult.firstName());
+        when(ioService.readStringWithPromptLocalized("StudentService.input.last.name")).thenReturn(expectedResult.lastName());
         Student currentResult = studentService.determineCurrentStudent();
         assertNotNull(currentResult);
-        assertEquals(currentResult.firstName(), expectedResult.firstName());
-        assertEquals(currentResult.lastName(), expectedResult.lastName());
+        assertEquals(expectedResult.firstName(), currentResult.firstName());
+        assertEquals(expectedResult.lastName(), currentResult.lastName());
     }
 }
 
