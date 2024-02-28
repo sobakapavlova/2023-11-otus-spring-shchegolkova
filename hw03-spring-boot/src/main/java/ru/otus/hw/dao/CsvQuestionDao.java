@@ -21,11 +21,11 @@ import java.util.List;
 @EnableConfigurationProperties(AppProperties.class)
 public class CsvQuestionDao implements QuestionDao {
 
-private final TestFileNameProvider fileNameProvider;
+    private final TestFileNameProvider fileNameProvider;
 
     @Override
     public List<Question> findAll() {
-        List<Question> questions = null;
+        List<Question> questions;
         try (InputStreamReader inputStreamReader = getInputStreamReader()) {
             List<QuestionDto> beans = new CsvToBeanBuilder(inputStreamReader)
                     .withType(QuestionDto.class)
@@ -38,7 +38,7 @@ private final TestFileNameProvider fileNameProvider;
                     .map(QuestionDto::toDomainObject)
                     .toList();
 
-        } catch (IOException e) {
+        } catch (Throwable e) {
             throw new QuestionReadException("Cannot read from file: ", e);
         }
         return questions;
