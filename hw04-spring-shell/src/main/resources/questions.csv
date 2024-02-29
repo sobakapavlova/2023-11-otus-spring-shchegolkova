@@ -1,0 +1,6 @@
+# Добавить сюда своих вопросов. Эту строку надо пропустить при настройке CsvToBean (withSkipLines)
+How often should you feed a cat?;Twice a day%false|Food should always be in the bowl%true|When it asks%false
+Does a cat need its own house or bed?;Yes, it's her sanctuary%true|The whole apartment is her space. The house is unnecessary%false|No, she'll sleep on the couch or the radiator%false
+What kind of food is better to give a cat?;Dry food only%false|Cooked meat%false|Wet and dry food%true
+Why do cats dig in their litter?;Doesn't like the smell%false|Because of the instinct for self-preservation%true|Out of boredom%false
+What taste can cats not perceive?;Sour%false|Spicy%false|Sweet%true
