@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.otus.spring.course</groupId>
-    <artifactId>otus-spring-course-01-homework</artifactId>
+    <artifactId>hw01-xml-config</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
         <maven.compiler.target>17</maven.compiler.target>

@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>01-homework</module>
+        <module>hw01-xml-config</module>
         <module>hw02-annotation-config</module>
         <module>hw03-spring-boot</module>
         <module>hw04-spring-shell</module>
