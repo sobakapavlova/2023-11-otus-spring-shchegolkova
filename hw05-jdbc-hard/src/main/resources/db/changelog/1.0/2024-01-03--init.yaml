@@ -3,74 +3,47 @@ databaseChangeLog:
       id: 1
       author: aschegolkova
       changes:
-        - createTable:
-            tableName: authors
-            columns:
-              - column:
-                  name: id
-                  type: BIGSERIAL
-                  constraints:
-                    primaryKey: true
-              - column:
-                  name: full_name
-                  type: VARCHAR(255)
+        - sql:
+            sql:
+              create table authors (
+                  id bigserial,
+                  full_name varchar(255),
+                  primary key (id)
+              );
+
   - changeSet:
       id: 2
       author: aschegolkova
       changes:
-        - createTable:
-            tableName: genres
-            columns:
-              - column:
-                  name: id
-                  type: BIGSERIAL
-                  constraints:
-                    primaryKey: true
-              - column:
-                  name: name
-                  type: VARCHAR(255)
+        - sql:
+            sql:
+              create table genres (
+                  id bigserial,
+                  name varchar(255),
+                  primary key (id)
+              );
 
   - changeSet:
       id: 3
       author: aschegolkova
       changes:
-        - createTable:
-            tableName: books
-            columns:
-              - column:
-                  name: id
-                  type: BIGSERIAL
-                  constraints:
-                    primaryKey: true
-              - column:
-                  name: title
-                  type: VARCHAR(255)
-              - column:
-                  name: author_id
-                  type: BIGSERIAL
-                  constraints:
-                    foreignKeyName: book_author_id_author_id_fk
-                    references: authors(id)
-                    deleteCascade: true
+        - sql:
+            sql:
+              create table books (
+                  id bigserial,
+                  title varchar(255),
+                  author_id bigint references authors (id) on delete cascade,
+                  primary key (id)
+              );
 
   - changeSet:
       id: 4
       author: aschegolkova
       changes:
-        - createTable:
-            tableName: books_genres
-            columns:
-              - column:
-                  name: book_id
-                  type: BIGSERIAL
-                  constraints:
-                    references: books(id)
-                    foreignKeyName: book_id_fk
-                    deleteCascade: true
-              - column:
-                  name: genre_id
-                  type: BIGSERIAL
-                  constraints:
-                    references: genres(id)
-                    foreignKeyName: genre_id_fk
-                    deleteCascade: true
+        - sql:
+            sql:
+              create table books_genres (
+                  book_id bigint references books(id) on delete cascade,
+                  genre_id bigint references genres(id) on delete cascade,
+                  primary key (book_id, genre_id)
+              );
